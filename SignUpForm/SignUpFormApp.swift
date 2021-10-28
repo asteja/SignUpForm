@@ -11,7 +11,10 @@ import SwiftUI
 struct SignUpFormApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                let signUpCoordinator = SignUpModule.shared.createSignUpCoordinator()
+                signUpCoordinator.createSignUpView()
+            }
         }
     }
 }
