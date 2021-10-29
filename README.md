@@ -1,4 +1,4 @@
-Project Configuration
+Project Configuration:
 Xcode 13
 IOS 15 and later
 Swift 5
