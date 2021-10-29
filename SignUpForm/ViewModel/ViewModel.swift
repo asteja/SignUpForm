@@ -5,10 +5,12 @@
 //  Created by Saiteja Alle on 10/28/21.
 //
 
-import Foundation
+import Combine
 
 class ViewModel: ObservableObject {
-    var user: User = User()
+    @Published var user: User = User()
+    @Published var showAlert = false
+    @Published var showConfirmScreen = false
     var dataStore: SignUpDataStore
     
     init(dataStore: SignUpDataStore) {
@@ -19,11 +21,24 @@ class ViewModel: ObservableObject {
         Task {
             let result = await dataStore.validateAccountDetails(user)
             switch result {
-            case .success(let isValid):
-                self.user.isCredentialValid = isValid
-            default:
-                break
+            case .success(let user):
+                if user.isEmailValid && user.isPasswordValid {
+                    self.user = user
+                    await self.setShowConfirmScreen(true)
+                }else {
+                    await self.setSignUpError(true)
+                }
+            case .failure(_):
+                await self.setSignUpError(true)
             }
         }
+    }
+    
+    @MainActor func setSignUpError(_ showAlert: Bool) {
+        self.showAlert = showAlert
+    }
+    
+    @MainActor func setShowConfirmScreen(_ showConfirmScreen: Bool) {
+        self.showConfirmScreen = showConfirmScreen
     }
 }

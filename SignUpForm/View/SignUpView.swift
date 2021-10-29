@@ -20,6 +20,10 @@ struct SignUpView: View {
             Spacer()
             submitButton
         }
+        .alert("PLease enter valid user name and password",
+               isPresented: $viewModel.showAlert,
+               actions: {
+        })
         .navigationBarHidden(true)
         .padding()
     }
@@ -37,7 +41,7 @@ struct SignUpView: View {
     var signUpForm: some View {
         Group {
             TextField("First Name", text: $viewModel.user.firstName)
-            TextField("Email Address (optional)", text: $viewModel.user.email)
+            TextField("Email Address", text: $viewModel.user.email)
             SecureField("Password", text: $viewModel.user.password)
             TextField("Website (optional)", text: $viewModel.user.website)
         }
@@ -48,12 +52,10 @@ struct SignUpView: View {
     
     var submitButton: some View {
         VStack {
-            NavigationLink(destination: ConfirmView(), isActive: $showConfirm) { EmptyView() }
+            NavigationLink(destination: ConfirmView()
+                            .environmentObject(viewModel),
+                           isActive: $viewModel.showConfirmScreen) { EmptyView() }
             Button("Submit") {
-                guard !viewModel.user.email.isEmpty && !viewModel.user.password.isEmpty else {
-                    return
-                }
-                self.showConfirm.toggle()
                 viewModel.didTapSubmit()
             }
             .primaryButtonAppearance()

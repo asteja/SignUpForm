@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ConfirmView: View {
     
+    @EnvironmentObject var viewModel: ViewModel
     @State var showSignin: Bool = false
     
     var body: some View {
@@ -24,7 +25,7 @@ struct ConfirmView: View {
     }
     
     var header: some View {
-        Text("Hello, Username!")
+        Text("Hello, \(viewModel.user.firstName.isEmpty ? viewModel.user.firstName : "User")!")
             .font(.system(size: Constants.headerTextSize, weight: .black))
     }
     
@@ -36,11 +37,15 @@ struct ConfirmView: View {
     
     var details: some View {
         VStack(alignment: .center, spacing: 10) {
-            Text("example.com")
-                .underline()
-                .foregroundColor(Color.blue)
-            Text("Username")
-            Text("username@example.com")
+            if !viewModel.user.website.isEmpty {
+                Text("\(viewModel.user.website)")
+                    .underline()
+                    .foregroundColor(Color.blue)
+            }
+            if !viewModel.user.firstName.isEmpty {
+                Text("\(viewModel.user.firstName)")
+            }
+            Text("\(viewModel.user.email)")
         }
         .tint(Color.black)
         .frame(maxWidth: .infinity)

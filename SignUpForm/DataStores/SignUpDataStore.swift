@@ -8,16 +8,19 @@
 import Foundation
 
 protocol SignUpDataStore {
-    func validateAccountDetails(_ user: User) async -> Result<Bool, Error>
+    func validateAccountDetails(_ user: User) async -> Result<User, Error>
 }
 
 class ImaginaryService: SignUpDataStore {
-    func validateAccountDetails(_ user: User) async -> Result<Bool, Error> {
+    func validateAccountDetails(_ user: User) async -> Result<User, Error> {
         await Task.sleep(2)
-        return .success(validateEmail(user.email) && validatePassword(user.password))
+        var user = user
+        user.isEmailValid = validateEmail(user.email)
+        user.isPasswordValid = validatePassword(user.password)
+        return .success(user)
     }
     
-    private func validateEmail(_ email: String) -> Bool {
+    func validateEmail(_ email: String) -> Bool {
         guard !email.isEmpty else {
             return false
         }
@@ -26,7 +29,7 @@ class ImaginaryService: SignUpDataStore {
         return predicate.evaluate(with: email)
     }
     
-    private func validatePassword(_ password: String) -> Bool {
+    func validatePassword(_ password: String) -> Bool {
         guard !password.isEmpty else {
             return false
         }
