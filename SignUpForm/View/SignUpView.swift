@@ -9,10 +9,8 @@ import SwiftUI
 
 struct SignUpView: View {
 
-    @State var firstName: String = ""
-    @State var email: String = ""
-    @State var password: String = ""
-    @State var website: String = ""
+    @EnvironmentObject var viewModel: ViewModel
+    @State var showConfirm: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -38,10 +36,10 @@ struct SignUpView: View {
     
     var signUpForm: some View {
         Group {
-            TextField("First Name", text: $firstName)
-            TextField("Email Address", text: $email)
-            SecureField("Password", text: $password)
-            TextField("Website", text: $website)
+            TextField("First Name", text: $viewModel.user.firstName)
+            TextField("Email Address (optional)", text: $viewModel.user.email)
+            SecureField("Password", text: $viewModel.user.password)
+            TextField("Website (optional)", text: $viewModel.user.website)
         }
         .foregroundColor(Color.black)
         .font(.system(size: 15, weight: .regular))
@@ -49,9 +47,16 @@ struct SignUpView: View {
     }
     
     var submitButton: some View {
-        NavigationLink(destination: ConfirmView()) {
-            Text("Submit")
-                .primaryButtonAppearance()
+        VStack {
+            NavigationLink(destination: ConfirmView(), isActive: $showConfirm) { EmptyView() }
+            Button("Submit") {
+                guard !viewModel.user.email.isEmpty && !viewModel.user.password.isEmpty else {
+                    return
+                }
+                self.showConfirm.toggle()
+                viewModel.didTapSubmit()
+            }
+            .primaryButtonAppearance()
         }
     }
 }

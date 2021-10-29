@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ConfirmView: View {
     
+    @State var showSignin: Bool = false
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             header
@@ -46,9 +48,12 @@ struct ConfirmView: View {
     }
     
     var signInButton: some View {
-        NavigationLink(destination: ConfirmView()) {
-            Text("Sign In")
-                .primaryButtonAppearance()
+        VStack {
+            NavigationLink(destination: ConfirmView(), isActive: $showSignin) { EmptyView() }
+            Button("Sign In") {
+                print("sign in tapped")
+            }
+            .primaryButtonAppearance()
         }
     }
 }

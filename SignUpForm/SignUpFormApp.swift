@@ -12,8 +12,9 @@ struct SignUpFormApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                let signUpCoordinator = SignUpModule.shared.createSignUpCoordinator()
-                signUpCoordinator.createSignUpView()
+                let signUpModule = SignUpModule()
+                let coordinator = signUpModule.createSignUpCoordinator()
+                coordinator.createSignUpView()
             }
         }
     }

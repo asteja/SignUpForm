@@ -8,7 +8,6 @@
 import SwiftUI
 
 public class SignUpModule {
-    static let shared = SignUpModule()
     func createSignUpCoordinator() -> SignUpCoordinator {
         return SignUpCoordinatorImpl()
     }
@@ -19,7 +18,15 @@ public protocol SignUpCoordinator {
 }
 
 class SignUpCoordinatorImpl: SignUpCoordinator {
+    var viewModel: ViewModel
+    
+    init() {
+        self.viewModel = ViewModel(dataStore: ImaginaryService())
+    }
+    
     func createSignUpView() -> AnyView {
-        return AnyView(SignUpView())
+        let signUpView = AnyView(SignUpView()
+                                    .environmentObject(self.viewModel))
+        return signUpView
     }
 }
