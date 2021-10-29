@@ -16,9 +16,6 @@ protocol SignUpDataStore {
 class ImaginaryService: SignUpDataStore {
     func validateAccountDetails(_ user: User) async -> Result<User, Error> {
         await Task.sleep(10000000000) // is equal to 10 seconds
-        var user = user
-        user.isEmailValid = validateEmail(user.email)
-        user.isPasswordValid = validatePassword(user.password)
         return .success(user)
     }
     

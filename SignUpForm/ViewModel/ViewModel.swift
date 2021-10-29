@@ -10,11 +10,14 @@ import Combine
 class ViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
+    @Published var firstName = ""
+    @Published var website = ""
     @Published var showConfirmScreen = false
     @Published var showLoadingIndicator: Bool = false
     @Published var signUpError: Bool = false
+    @Published var isEmailValid: Bool = false
+    @Published var isPasswordValid: Bool = false
     var dataStore: SignUpDataStore
-    var user: User = User()
     private var bag = Set<AnyCancellable>()
         
     init(dataStore: SignUpDataStore) {
@@ -22,20 +25,20 @@ class ViewModel: ObservableObject {
         self.$email
             .removeDuplicates()
             .sink { email in
-                self.user.isEmailValid = dataStore.validateEmail(email)
+                self.isEmailValid = dataStore.validateEmail(email)
             }
             .store(in: &bag)
         self.$password
             .removeDuplicates()
             .sink { password in
-                self.user.isPasswordValid = dataStore.validatePassword(password)
+                self.isPasswordValid = dataStore.validatePassword(password)
             }
             .store(in: &bag)
     }
     
     func getHeaderText() -> String {
         if showConfirmScreen {
-            return "Hello, \(user.firstName.isEmpty ? "User" : user.firstName)!"
+            return "Hello, \(firstName.isEmpty ? "User" : firstName)!"
         }else {
             return "Profile Creation"
         }
@@ -59,8 +62,10 @@ class ViewModel: ObservableObject {
     
     func didTapSubmit() {
         Task {
-            user.email = self.email
-            user.password = self.password
+            let user = User(firstName: self.firstName,
+                            email: self.email,
+                            password: self.password,
+                            website: self.website)
             let result = await dataStore.validateAccountDetails(user)
             await self.handleServiceResponse(result: result)
         }
@@ -70,8 +75,11 @@ class ViewModel: ObservableObject {
         switch result {
         case .success(let user):
             self.showLoadingIndicator = false
-            self.user = user
-            if user.isEmailValid && user.isPasswordValid {
+            self.firstName = user.firstName
+            self.email = user.email
+            self.password = user.password
+            self.website = user.website
+            if self.isEmailValid && self.isPasswordValid {
                 self.showConfirmScreen = true
             }else {
                 self.signUpError = true

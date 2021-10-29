@@ -48,20 +48,20 @@ struct SignUpView: View {
     
     var signUpForm: some View {
         Group {
-            TextField("First Name", text: $viewModel.user.firstName)
+            TextField("First Name", text: $viewModel.firstName)
             TextField("Email Address", text: $viewModel.email)
             if !viewModel.email.isEmpty || viewModel.signUpError {
                 Text("* Please enter valid email address")
-                    .foregroundColor(viewModel.user.isEmailValid ? .green : .red)
+                    .foregroundColor(viewModel.isEmailValid ? .green : .red)
                     .font(.system(size: Constants.bodyTextSize, weight: .regular))
             }
             SecureField("Password", text: $viewModel.password)
             if !viewModel.password.isEmpty || viewModel.signUpError {
                 Text("* Atleast 8 characters contain Alphanumeric characters with symbols #?!@$%^&<>*~:`-")
-                    .foregroundColor(viewModel.user.isPasswordValid ? .green : .red)
+                    .foregroundColor(viewModel.isPasswordValid ? .green : .red)
                     .font(.system(size: Constants.bodyTextSize, weight: .regular))
             }
-            TextField("Website (optional)", text: $viewModel.user.website)
+            TextField("Website (optional)", text: $viewModel.website)
         }
         .background(viewModel.showLoadingIndicator ? .gray : .white)
         .opacity(viewModel.showLoadingIndicator ? 0.5 : 1)
@@ -71,15 +71,15 @@ struct SignUpView: View {
     
     var details: some View {
         VStack(alignment: .center, spacing: 10) {
-            if !viewModel.user.website.isEmpty {
-                Text("\(viewModel.user.website)")
+            if !viewModel.website.isEmpty {
+                Text(viewModel.website)
                     .underline()
                     .foregroundColor(Color.blue)
             }
-            if !viewModel.user.firstName.isEmpty {
-                Text("\(viewModel.user.firstName)")
+            if !viewModel.firstName.isEmpty {
+                Text(viewModel.firstName)
             }
-            Text("\(viewModel.user.email)")
+            Text(viewModel.email)
         }
         .tint(Color.black)
         .frame(maxWidth: .infinity)

@@ -48,8 +48,8 @@ class ImaginaryServiceTests: XCTestCase {
             switch result {
             case .success(let user):
                 //Then
-                XCTAssertFalse(user.isPasswordValid)
-                XCTAssertFalse(user.isEmailValid)
+                XCTAssertTrue(user.email.isEmpty)
+                XCTAssertTrue(user.password.isEmpty)
             default:
                 break
             }

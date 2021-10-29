@@ -12,6 +12,4 @@ struct User: Codable {
     var email = ""
     var password = ""
     var website = ""
-    var isEmailValid = false
-    var isPasswordValid = false
 }

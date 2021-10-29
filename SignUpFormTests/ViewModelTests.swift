@@ -62,8 +62,8 @@ class ViewModelTests: XCTestCase {
 
     func testDidTapSubmit() throws {
         //Given
-        let user = User(email: "example@email.com", password: "Pas$word123")
-        self.target?.user = user
+        self.target?.email = "example@email.com"
+        self.target?.password = "Pas$word123"
         //When
         self.target?.didTapSubmit()
         //Then
@@ -97,9 +97,6 @@ class ViewModelTests: XCTestCase {
     }
     
     func testDidTapSubmitForError() throws {
-        //Given
-        let user = User()
-        self.target?.user = user
         //When
         self.target?.didTapSubmit()
         //Then
