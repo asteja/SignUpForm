@@ -17,10 +17,13 @@
 		93FAEED7272B5696008EDD87 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEED6272B5696008EDD87 /* User.swift */; };
 		93FAEED9272B5721008EDD87 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEED8272B5721008EDD87 /* ViewModel.swift */; };
 		93FAEEDD272B775C008EDD87 /* SignUpDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEEDC272B775B008EDD87 /* SignUpDataStore.swift */; };
+		93FAEEF9272BBFD9008EDD87 /* SignUpFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEEF8272BBFD9008EDD87 /* SignUpFormTests.swift */; };
+		93FAEEFB272BC051008EDD87 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEEFA272BC051008EDD87 /* ViewModelTests.swift */; };
+		93FAEEFD272BC32B008EDD87 /* ImaginaryServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FAEEFC272BC32B008EDD87 /* ImaginaryServiceTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		93FAEEE6272BBEA7008EDD87 /* PBXContainerItemProxy */ = {
+		93FAEEF3272BBFC7008EDD87 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 938D1168272B1ADD003FE948 /* Project object */;
 			proxyType = 1;
@@ -41,7 +44,10 @@
 		93FAEED6272B5696008EDD87 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		93FAEED8272B5721008EDD87 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		93FAEEDC272B775B008EDD87 /* SignUpDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDataStore.swift; sourceTree = "<group>"; };
-		93FAEEE2272BBEA7008EDD87 /* SignUpFormTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignUpFormTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FAEEEF272BBFC7008EDD87 /* SignUpFormTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SignUpFormTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		93FAEEF8272BBFD9008EDD87 /* SignUpFormTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpFormTests.swift; sourceTree = "<group>"; };
+		93FAEEFA272BC051008EDD87 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		93FAEEFC272BC32B008EDD87 /* ImaginaryServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaginaryServiceTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +58,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93FAEEDF272BBEA7008EDD87 /* Frameworks */ = {
+		93FAEEEC272BBFC7008EDD87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				938D1172272B1ADD003FE948 /* SignUpForm */,
+				93FAEEF0272BBFC7008EDD87 /* SignUpFormTests */,
 				938D1171272B1ADD003FE948 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,7 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				938D1170272B1ADD003FE948 /* SignUpForm.app */,
-				93FAEEE2272BBEA7008EDD87 /* SignUpFormTests.xctest */,
+				93FAEEEF272BBFC7008EDD87 /* SignUpFormTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,6 +151,16 @@
 			path = DataStores;
 			sourceTree = "<group>";
 		};
+		93FAEEF0272BBFC7008EDD87 /* SignUpFormTests */ = {
+			isa = PBXGroup;
+			children = (
+				93FAEEF8272BBFD9008EDD87 /* SignUpFormTests.swift */,
+				93FAEEFA272BC051008EDD87 /* ViewModelTests.swift */,
+				93FAEEFC272BC32B008EDD87 /* ImaginaryServiceTests.swift */,
+			);
+			path = SignUpFormTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,22 +181,22 @@
 			productReference = 938D1170272B1ADD003FE948 /* SignUpForm.app */;
 			productType = "com.apple.product-type.application";
 		};
-		93FAEEE1272BBEA7008EDD87 /* SignUpFormTests */ = {
+		93FAEEEE272BBFC7008EDD87 /* SignUpFormTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93FAEEE8272BBEA7008EDD87 /* Build configuration list for PBXNativeTarget "SignUpFormTests" */;
+			buildConfigurationList = 93FAEEF5272BBFC7008EDD87 /* Build configuration list for PBXNativeTarget "SignUpFormTests" */;
 			buildPhases = (
-				93FAEEDE272BBEA7008EDD87 /* Sources */,
-				93FAEEDF272BBEA7008EDD87 /* Frameworks */,
-				93FAEEE0272BBEA7008EDD87 /* Resources */,
+				93FAEEEB272BBFC7008EDD87 /* Sources */,
+				93FAEEEC272BBFC7008EDD87 /* Frameworks */,
+				93FAEEED272BBFC7008EDD87 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				93FAEEE7272BBEA7008EDD87 /* PBXTargetDependency */,
+				93FAEEF4272BBFC7008EDD87 /* PBXTargetDependency */,
 			);
 			name = SignUpFormTests;
 			productName = SignUpFormTests;
-			productReference = 93FAEEE2272BBEA7008EDD87 /* SignUpFormTests.xctest */;
+			productReference = 93FAEEEF272BBFC7008EDD87 /* SignUpFormTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -195,7 +212,7 @@
 					938D116F272B1ADD003FE948 = {
 						CreatedOnToolsVersion = 13.0;
 					};
-					93FAEEE1272BBEA7008EDD87 = {
+					93FAEEEE272BBFC7008EDD87 = {
 						CreatedOnToolsVersion = 13.0;
 						TestTargetID = 938D116F272B1ADD003FE948;
 					};
@@ -215,7 +232,7 @@
 			projectRoot = "";
 			targets = (
 				938D116F272B1ADD003FE948 /* SignUpForm */,
-				93FAEEE1272BBEA7008EDD87 /* SignUpFormTests */,
+				93FAEEEE272BBFC7008EDD87 /* SignUpFormTests */,
 			);
 		};
 /* End PBXProject section */
@@ -230,7 +247,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93FAEEE0272BBEA7008EDD87 /* Resources */ = {
+		93FAEEED272BBFC7008EDD87 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,20 +272,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93FAEEDE272BBEA7008EDD87 /* Sources */ = {
+		93FAEEEB272BBFC7008EDD87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FAEEFB272BC051008EDD87 /* ViewModelTests.swift in Sources */,
+				93FAEEFD272BC32B008EDD87 /* ImaginaryServiceTests.swift in Sources */,
+				93FAEEF9272BBFD9008EDD87 /* SignUpFormTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		93FAEEE7272BBEA7008EDD87 /* PBXTargetDependency */ = {
+		93FAEEF4272BBFC7008EDD87 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 938D116F272B1ADD003FE948 /* SignUpForm */;
-			targetProxy = 93FAEEE6272BBEA7008EDD87 /* PBXContainerItemProxy */;
+			targetProxy = 93FAEEF3272BBFC7008EDD87 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -449,7 +469,7 @@
 			};
 			name = Release;
 		};
-		93FAEEE9272BBEA7008EDD87 /* Debug */ = {
+		93FAEEF6272BBFC7008EDD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -472,7 +492,7 @@
 			};
 			name = Debug;
 		};
-		93FAEEEA272BBEA7008EDD87 /* Release */ = {
+		93FAEEF7272BBFC7008EDD87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -516,11 +536,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		93FAEEE8272BBEA7008EDD87 /* Build configuration list for PBXNativeTarget "SignUpFormTests" */ = {
+		93FAEEF5272BBFC7008EDD87 /* Build configuration list for PBXNativeTarget "SignUpFormTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				93FAEEE9272BBEA7008EDD87 /* Debug */,
-				93FAEEEA272BBEA7008EDD87 /* Release */,
+				93FAEEF6272BBFC7008EDD87 /* Debug */,
+				93FAEEF7272BBFC7008EDD87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
