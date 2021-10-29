@@ -9,11 +9,13 @@ import Foundation
 
 protocol SignUpDataStore {
     func validateAccountDetails(_ user: User) async -> Result<User, Error>
+    func validateEmail(_ email: String) -> Bool
+    func validatePassword(_ password: String) -> Bool
 }
 
 class ImaginaryService: SignUpDataStore {
     func validateAccountDetails(_ user: User) async -> Result<User, Error> {
-        await Task.sleep(2)
+        await Task.sleep(10000000000) // is equal to 10 seconds
         var user = user
         user.isEmailValid = validateEmail(user.email)
         user.isPasswordValid = validatePassword(user.password)

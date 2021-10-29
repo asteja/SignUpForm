@@ -10,56 +10,89 @@ import SwiftUI
 struct SignUpView: View {
 
     @EnvironmentObject var viewModel: ViewModel
-    @State var showConfirm: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            header
-            helperText
-            signUpForm
-            Spacer()
-            submitButton
+        ZStack {
+            if viewModel.showLoadingIndicator && !viewModel.showConfirmScreen {
+                ProgressView()
+                    .tint(Color.red)
+            }
+            VStack(alignment: .leading, spacing: 10) {
+                header
+                helperText
+                if viewModel.showConfirmScreen {
+                    details
+                }else {
+                    signUpForm
+                }
+                Spacer()
+                submitButton
+            }
+            .padding()
         }
-        .alert("PLease enter valid user name and password",
-               isPresented: $viewModel.showAlert,
-               actions: {
-        })
+        .background(viewModel.showLoadingIndicator && !viewModel.showConfirmScreen ? .gray : .white)
+        .opacity(viewModel.showLoadingIndicator && !viewModel.showConfirmScreen ? 0.5 : 1)
         .navigationBarHidden(true)
-        .padding()
     }
     
     var header: some View {
-        Text("Profile Creation")
+        Text(viewModel.getHeaderText())
             .font(.system(size: Constants.headerTextSize, weight: .black))
     }
     
     var helperText: some View {
-        Text("Use the form below to submit your portfolio \nAn email and password are required")
-            .font(.system(size: Constants.bodyTextSize, weight: .light))
+        Text(viewModel.getHelperText())
+            .foregroundColor(Color.gray)
+            .font(.system(size: Constants.bodyTextSize, weight: .regular))
     }
     
     var signUpForm: some View {
         Group {
             TextField("First Name", text: $viewModel.user.firstName)
-            TextField("Email Address", text: $viewModel.user.email)
-            SecureField("Password", text: $viewModel.user.password)
+            TextField("Email Address", text: $viewModel.email)
+            if !viewModel.email.isEmpty || viewModel.signUpError {
+                Text("* Please enter valid email address")
+                    .foregroundColor(viewModel.user.isEmailValid ? .green : .red)
+                    .font(.system(size: Constants.bodyTextSize, weight: .regular))
+            }
+            SecureField("Password", text: $viewModel.password)
+            if !viewModel.password.isEmpty || viewModel.signUpError {
+                Text("* Atleast 8 characters contain Alphanumeric characters with symbols #?!@$%^&<>*~:`-")
+                    .foregroundColor(viewModel.user.isPasswordValid ? .green : .red)
+                    .font(.system(size: Constants.bodyTextSize, weight: .regular))
+            }
             TextField("Website (optional)", text: $viewModel.user.website)
         }
-        .foregroundColor(Color.black)
+        .background(viewModel.showLoadingIndicator ? .gray : .white)
+        .opacity(viewModel.showLoadingIndicator ? 0.5 : 1)
         .font(.system(size: 15, weight: .regular))
         .textFieldStyle(.roundedBorder)
     }
     
-    var submitButton: some View {
-        VStack {
-            NavigationLink(destination: ConfirmView()
-                            .environmentObject(viewModel),
-                           isActive: $viewModel.showConfirmScreen) { EmptyView() }
-            Button("Submit") {
-                viewModel.didTapSubmit()
+    var details: some View {
+        VStack(alignment: .center, spacing: 10) {
+            if !viewModel.user.website.isEmpty {
+                Text("\(viewModel.user.website)")
+                    .underline()
+                    .foregroundColor(Color.blue)
             }
-            .primaryButtonAppearance()
+            if !viewModel.user.firstName.isEmpty {
+                Text("\(viewModel.user.firstName)")
+            }
+            Text("\(viewModel.user.email)")
         }
+        .tint(Color.black)
+        .frame(maxWidth: .infinity)
+        .font(.system(size: Constants.bodyTextSize, weight: .regular))
+    }
+    
+    var submitButton: some View {
+        Button(viewModel.getPrimaryButtonTitleText()) {
+            viewModel.signUpError = false
+            viewModel.showLoadingIndicator = true
+            viewModel.didTapSubmit()
+        }
+        .primaryButtonAppearance()
     }
 }
 
